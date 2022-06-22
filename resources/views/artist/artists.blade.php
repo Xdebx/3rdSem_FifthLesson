@@ -8,7 +8,7 @@
         <p>{{ Session::get('success') }}</p>
       </div><br />
      @endif
-
+     {{-- //! import excel file --}}
      <div class="col-xs-6">
       <form method="post" enctype="multipart/form-data" action="{{ url('/artist/import') }}">
          @csrf

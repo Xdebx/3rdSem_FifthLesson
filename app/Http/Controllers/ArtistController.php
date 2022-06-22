@@ -191,6 +191,7 @@ class ArtistController extends Controller
 
                 }
                 public function import(Request $request) {
+                    //! import excel file
         
                          $request->validate([
                         'artist_upload' => ['required', new ExcelRule($request->file('artist_upload'))],
