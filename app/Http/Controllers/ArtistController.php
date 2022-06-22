@@ -28,7 +28,7 @@ class ArtistController extends Controller
     public function index(request $request)
     {
         //! ==========================New Codes===================
-        //! Need Request $request parameter for searching
+        //! Need Request $request sa parameter ng index for searching
 
         if (empty($request->get('search'))) {
             $artists = Artist::has('albums')->get();
