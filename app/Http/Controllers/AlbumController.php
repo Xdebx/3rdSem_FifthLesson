@@ -10,6 +10,11 @@ use Redirect;
 use App\DataTables\AlbumsDataTable;
 use DataTables;
 
+use App\Imports\AlbumImport;
+use App\Imports\AlbumArtistListenerImport;
+use Excel;
+use App\Rules\ExcelRule;
+
 class AlbumController extends Controller
 {
     /**
@@ -165,4 +170,16 @@ class AlbumController extends Controller
         return $dataTable->render('album.albums');
 
     }
+
+    public function import(Request $request) {
+        
+        $request->validate([
+           'album_upload' => ['required', new ExcelRule($request->file('album_upload'))],
+       ]);
+       // dd($request);
+       // Excel::import(new AlbumImport, request()->file('album_upload'));
+        Excel::import(new AlbumArtistListenerImport, request()->file('album_upload'));
+       
+       return redirect()->back()->with('success', 'Excel file Imported Successfully');
+   }
 }

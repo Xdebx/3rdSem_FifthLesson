@@ -8,6 +8,17 @@
         <p>{{ Session::get('success') }}</p>
       </div><br />
      @endif
+     <div class="col-xs-6">
+      <form method="post" enctype="multipart/form-data" action="{{ url('/album/import') }}">
+         @csrf
+       <input type="file" id="uploadName" name="album_upload" required>
+       
+   </div>
+@error('album_upload')
+     <small>{{ $message }}</small>
+   @enderror
+        <button type="submit" class="btn btn-info btn-primary " >Import Excel File</button>
+        </form> 
      <a href="#" data-toggle="modal" data-target="#albumModal" class="btn btn-primary a-btn-slide-text">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <span><strong>Add new album</strong></span>            

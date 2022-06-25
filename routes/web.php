@@ -35,6 +35,8 @@ Route::resource('listener', 'ListenerController')->except(['index','show']);
 
 Route::post('/artist/import', 'ArtistController@import')->name('artistImport');
 Route::post('/listener/import', 'ListenerController@import')->name('listenerImport');
+Route::post('/album/import', 'AlbumController@import')->name('albumImport');
+Route::post('/contact',['uses' => 'MailController@contact','as' => 'contact']);
 
 
 

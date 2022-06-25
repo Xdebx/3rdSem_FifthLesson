@@ -10,7 +10,7 @@
         @yield('styles')
     </head>
     <body>
-@include('partials.\header')
+@include('layouts.\header')
 
     <div class="container">
         @yield('content')
