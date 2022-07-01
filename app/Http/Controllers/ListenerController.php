@@ -14,6 +14,10 @@ use App\Imports\ListenerImport;
 use Excel;
 use App\Rules\ExcelRule;
 
+use App\Events\SendMail;
+use Event;
+use Auth;
+
 class ListenerController extends Controller
 {
     /**
@@ -67,21 +71,32 @@ class ListenerController extends Controller
      */
     public function store(Request $request)
     {
-        ///===============New Method=============
         $input = $request->all();
-        // dd($request->album_id);
+        $input['password'] = bcrypt($request->password);
         $listener = Listener::create($input);
-
+        Event::dispatch(new SendMail($listener));
         if(!(empty($request->album_id))){
-            foreach ($request->album_id as $album_id) 
-            {
-                $listener->albums()->attach($album_id);
-            } 
-            //end foreach
-        }
-
-        return Redirect::to('listeners')->with('success','New Listener created!');  
+                $listener->albums()->attach($request->album_id);
+          }
+        return Redirect::route('getListeners')->with('success','listener created!');
     }
+    // public function store(Request $request)
+    // {
+    //     ///===============New Method=============
+    //     $input = $request->all();
+    //     // dd($request->album_id);
+    //     $listener = Listener::create($input);
+
+    //     if(!(empty($request->album_id))){
+    //         foreach ($request->album_id as $album_id) 
+    //         {
+    //             $listener->albums()->attach($album_id);
+    //         } 
+    //         //end foreach
+    //     }
+
+    //     return Redirect::to('listeners')->with('success','New Listener created!');  
+    // }
 
     /**
      * Display the specified resource.

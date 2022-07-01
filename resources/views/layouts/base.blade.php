@@ -5,6 +5,7 @@
  <title></title>
  </head>
  <body>
+   <div class="row">@include('layouts.nav')</div>
  @yield('body')
  @include('layouts.header')
  <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
